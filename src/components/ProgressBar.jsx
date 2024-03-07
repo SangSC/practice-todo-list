@@ -1,6 +1,7 @@
 import React from "react";
 
 const ProgressBar = ({ percentage }) => {
+  // initial value is 0, let percentage be an integer
   const formattedPercentage = percentage ? Math.floor(percentage) : 0;
 
   return (

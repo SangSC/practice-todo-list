@@ -9,26 +9,31 @@ const App = () => {
   const [moveDoneToEnd, setMoveDoneToEnd] = useState(false);
   const [checkedPercentage, setCheckedPercentage] = useState(0);
 
+  // sort the list
   useEffect(() => {
     // if moveDoneToEnd is true, sort the list
     sortToDoList();
   }, [moveDoneToEnd, toDoList]);
 
+  // calculate the percentage of checked tasks
   useEffect(() => {
     const checkedTasks = toDoList.filter((task) => task.checked);
     const percentage = (checkedTasks.length / toDoList.length) * 100;
     setCheckedPercentage(percentage);
   }, [toDoList]);
 
+  // add task
   const addTask = (taskName) => {
     const newTask = { taskName, checked: false };
     setToDoList([...toDoList, newTask]);
   };
 
+  // delete task
   function deleteTask(deleteTaskName) {
     setToDoList(toDoList.filter((task) => task.taskName !== deleteTaskName));
   }
 
+  // check the task
   function toggleCheck(taskName) {
     setToDoList((prevToDoList) =>
       prevToDoList.map((task) =>
@@ -37,6 +42,7 @@ const App = () => {
     );
   }
 
+  // sort the list
   function sortToDoList() {
     // if moveDoneToEnd is true, sort the list
     if (moveDoneToEnd) {
@@ -54,6 +60,8 @@ const App = () => {
         <h1>Todo List</h1>
         <p className="text-[10px]">Add things to do</p>
         <hr />
+
+        {/* progress bar */}
         <ProgressBar percentage={checkedPercentage} />
 
         {/* todo container */}
@@ -71,6 +79,7 @@ const App = () => {
                 />
               ))}
           </ul>
+          {/* if the list is empty */}
           {toDoList.length === 0 ? (
             <p className="notify">No task to do</p>
           ) : null}
@@ -85,6 +94,7 @@ const App = () => {
           <Toggle handleToggle={setMoveDoneToEnd} />
         </div>
 
+        {/* input */}
         <TaskInput addTask={addTask} />
       </div>
     </>
