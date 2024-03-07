@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const Toggle = ({ handleToggle }) => {
   const [moveDoneToEnd, setMoveDoneToEnd] = useState(false);
 
+  // toggle the moveDoneToEnd state
   const toggleMoveDoneToEnd = () => {
     setMoveDoneToEnd(!moveDoneToEnd);
     handleToggle(!moveDoneToEnd);
@@ -12,8 +13,9 @@ const Toggle = ({ handleToggle }) => {
     <label class="switch">
       <input
         type="checkbox"
-        onChange={toggleMoveDoneToEnd}
+        // if checked is true, trigger the toggleMoveDoneToEnd function
         checked={moveDoneToEnd}
+        onChange={toggleMoveDoneToEnd}
       />
       <div class="slider"></div>
       <div class="slider-card">

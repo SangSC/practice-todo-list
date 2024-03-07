@@ -9,9 +9,8 @@ const App = () => {
   const [moveDoneToEnd, setMoveDoneToEnd] = useState(false);
   const [checkedPercentage, setCheckedPercentage] = useState(0);
 
-  // sort the list
+  // if moveDoneToEnd is true, sort the list
   useEffect(() => {
-    // if moveDoneToEnd is true, sort the list
     sortToDoList();
   }, [moveDoneToEnd, toDoList]);
 
@@ -24,8 +23,17 @@ const App = () => {
 
   // add task
   const addTask = (taskName) => {
-    const newTask = { taskName, checked: false };
-    setToDoList([...toDoList, newTask]);
+    // Check if taskName already exists in the list
+    const existingTask = toDoList.find((task) => task.taskName === taskName);
+
+    if (existingTask) {
+      // If taskName already exists, toggle its checked status
+      toggleCheck(taskName);
+    } else {
+      // If taskName does not exist, add it as a new task
+      const newTask = { taskName, checked: false };
+      setToDoList([...toDoList, newTask]);
+    }
   };
 
   // delete task
@@ -69,6 +77,7 @@ const App = () => {
           <ul className="list-items">
             {toDoList
               .slice()
+              // let the newest task to be on the top
               .reverse()
               .map((task, key) => (
                 <TaskItem
