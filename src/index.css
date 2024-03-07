@@ -1,0 +1,273 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @layer base {
+    :root {
+      --background: 237 100% 96%;
+      --foreground: 229 28% 66%;
+      --primary: 221 61% 65%;
+      --primary-foreground: 0 100% 100%;
+      --secondary: 228 86% 89%;
+      --secondary-foreground: 0 100% 100%;
+      --muted: 215 30% 79%;
+      --muted-foreground: 237 13% 40%;
+      --border: 222 34% 82%;
+      --accent: 223 100% 78%;
+    }
+  }
+}
+
+@layer base {
+  * {
+    font-family: Nunito, sans-serif;
+  }
+
+  .task-container {
+    @apply bg-background text-foreground;
+    height: 560px;
+    width: 400px;
+    margin: 3rem auto;
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 15px 30px 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(
+      to bottom right,
+      hsl(205, 100%, 96%),
+      hsl(237, 100%, 96%)
+    );
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h1 {
+    @apply text-xl font-bold;
+  }
+  h2 {
+    @apply text-sm font-bold;
+  }
+
+  p {
+    @apply text-[10px] text-muted;
+  }
+
+  hr {
+    @apply my-2 text-border;
+    border: 1px solid;
+  }
+
+  /* scrollbar */
+  *::-webkit-scrollbar {
+    width: 5px;
+    right: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: hsl(230, 73%, 88%);
+    border-radius: 20px;
+  }
+
+  /* todo list style */
+  .toDoList {
+    height: 250px;
+    overflow-y: scroll;
+    scrollbar-color: hsl(230, 73%, 88%);
+  }
+  .toDoList span {
+    color: rgb(161, 160, 160);
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .toDoList .list-items {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .list-items .items {
+    background: hsl(0, 100%, 100%);
+    border-left: 5px solid hsl(222, 48%, 64%);
+    border-radius: 5px;
+    padding: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgb(186, 186, 186);
+  }
+  input[type="checkbox"] {
+    @apply ml-2;
+    accent-color: hsl(223, 60%, 65%);
+    padding: 0.5rem;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  .items:hover {
+    background: hsl(229, 74%, 95%);
+    transition: 0.3s;
+  }
+
+  .items-text {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .items-text div {
+    color: hsl(222, 25%, 74%);
+    overflow: hidden;
+  }
+  .notify {
+    @apply text-muted;
+    text-align: center;
+
+    font-size: 15px;
+  }
+
+  .delete-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 30px !important;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 2px;
+    right: 0;
+    display: block;
+  }
+  .delete-icon:hover {
+    color: rgba(255, 0, 0, 0.534);
+    transition: 0.3s;
+  }
+
+  .isChecked {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  .stats {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background: #282851;
+  }
+
+  /* todo input */
+  .todo-input {
+    @apply bottom-0;
+    height: 80px;
+    margin: auto;
+  }
+  input {
+    border-radius: 5px;
+    width: 80%;
+    height: 50px;
+    padding: 10px;
+  }
+  .add-btn {
+    @apply bg-primary text-white text-[30px];
+    border-radius: 5px;
+    width: 18%;
+    height: 50px;
+  }
+  .add-btn:hover {
+    @apply bg-primary/90;
+  }
+
+  /* toggle */
+  .switch {
+    --circle-dim: 1.4em;
+    font-size: 10px;
+    position: relative;
+    display: inline-block;
+    width: 3.5em;
+    height: 2em;
+  }
+
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* The slider */
+  .slider {
+    @apply bg-secondary-foreground;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+    border-radius: 30px;
+  }
+
+  .slider-card {
+    position: absolute;
+    content: "";
+    height: var(--circle-dim);
+    width: var(--circle-dim);
+    border-radius: 20px;
+    left: 0.3em;
+    bottom: 0.3em;
+    transition: 0.4s;
+    pointer-events: none;
+  }
+
+  .slider-card-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    border-radius: 50%;
+    transition: 0.4s transform;
+  }
+
+  .slider-card-front {
+    @apply bg-secondary;
+  }
+
+  .slider-card-back {
+    @apply bg-secondary-foreground;
+    transform: rotateY(180deg);
+  }
+
+  input:checked ~ .slider-card .slider-card-back {
+    transform: rotateY(0);
+  }
+
+  input:checked ~ .slider-card .slider-card-front {
+    transform: rotateY(-180deg);
+  }
+
+  input:checked ~ .slider-card {
+    transform: translateX(1.5em);
+  }
+
+  input:checked ~ .slider {
+    @apply bg-secondary;
+  }
+
+  /* Media Query: iPhone (Vertical) */
+  @media screen and (max-width: 376px) {
+    .task-container {
+      width: 95vw;
+    }
+  }
+}
