@@ -1,3 +1,24 @@
+# [ToDo List](https://todo-list-sc-gamma.vercel.app/)
+
+![pic](https://i.imgur.com/qD42AGF.jpeg)
+
+
+### Tools used:
+- React
+- Tailwind CSS
+- npm
+
+### Key features include:
+- Responsive Web Design (RWD)
+- AddTask
+- DeleteTask
+- Progress bar
+- move done task to the end 
+
+
+***
+***
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
