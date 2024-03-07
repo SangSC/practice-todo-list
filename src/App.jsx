@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProgressBar from "./components/ProgressBar";
 import TaskInput from "./components/TaskInput";
 import Toggle from "./components/Toggle";
@@ -6,6 +6,19 @@ import TaskItem from "./components/TaskItem";
 
 const App = () => {
   const [toDoList, setToDoList] = useState([]);
+  const [moveDoneToEnd, setMoveDoneToEnd] = useState(false);
+  const [checkedPercentage, setCheckedPercentage] = useState(0);
+
+  useEffect(() => {
+    // if moveDoneToEnd is true, sort the list
+    sortToDoList();
+  }, [moveDoneToEnd, toDoList]);
+
+  useEffect(() => {
+    const checkedTasks = toDoList.filter((task) => task.checked);
+    const percentage = (checkedTasks.length / toDoList.length) * 100;
+    setCheckedPercentage(percentage);
+  }, [toDoList]);
 
   const addTask = (taskName) => {
     const newTask = { taskName, checked: false };
@@ -24,13 +37,24 @@ const App = () => {
     );
   }
 
+  function sortToDoList() {
+    // if moveDoneToEnd is true, sort the list
+    if (moveDoneToEnd) {
+      const sortedList = [...toDoList].sort((a, b) =>
+        a.checked === b.checked ? 0 : a.checked ? -1 : 1
+      );
+
+      setToDoList(sortedList);
+    }
+  }
+
   return (
     <>
       <div className="task-container">
         <h1>Todo List</h1>
         <p className="text-[10px]">Add things to do</p>
         <hr />
-        <ProgressBar />
+        <ProgressBar percentage={checkedPercentage} />
 
         {/* todo container */}
         <div className="toDoList">
@@ -54,11 +78,11 @@ const App = () => {
         <hr />
 
         {/* toggle sort */}
-        <div className="h-[80px] flex justify-end">
+        <div className="h-[70px] flex justify-end">
           <p className="text-[15px] text-muted mr-2">
             Move done things to the end?
           </p>
-          <Toggle />
+          <Toggle handleToggle={setMoveDoneToEnd} />
         </div>
 
         <TaskInput addTask={addTask} />

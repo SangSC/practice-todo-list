@@ -64,6 +64,32 @@
     border: 1px solid;
   }
 
+  /* progress bar */
+
+  .progress-container {
+    display: flex;
+    align-items: center;
+    margin: 20px 5px 20px 5px;
+  }
+
+  .progress-text {
+    @apply w-[10%] text-center;
+    font-size: 15px;
+  }
+
+  .progress-bar {
+    @apply w-[85%] ml-3;
+    width: 100%;
+    height: 10px;
+    border-radius: 20px;
+    background-color: hsl(0, 100%, 100%);
+  }
+  .progress-fill {
+    height: 100%;
+    height: 10px;
+    border-radius: 20px;
+    background-color: hsl(223, 93%, 78%);
+  }
   /* scrollbar */
   *::-webkit-scrollbar {
     width: 5px;
@@ -81,7 +107,7 @@
 
   /* todo list style */
   .toDoList {
-    height: 250px;
+    height: 230px;
     overflow-y: scroll;
     scrollbar-color: hsl(230, 73%, 88%);
   }
@@ -93,7 +119,6 @@
   }
 
   .toDoList .list-items {
-    margin-top: 1rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
